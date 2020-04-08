@@ -24,6 +24,7 @@ void startuptext() {
     cout << "2. Show all your gun orders." << endl;
     cout << "3. Update an order." << endl;
     cout << "4. Delete an order." << endl;
+    cout << "0. Exit." << endl;
 }
 
 int main()
@@ -40,6 +41,8 @@ int main()
             case 4:
                     break;
             case 0:
+            system("cls");
+            cout << "Thank you for using our program!";
             return 0;
         }
     }
