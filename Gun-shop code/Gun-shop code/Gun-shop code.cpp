@@ -33,12 +33,16 @@ int main()
     while (true) {
         switch(ans) {
             case 1:
+                    createOrder();
                     break;
             case 2:
+                    readallOrders();
                     break;
             case 3:
+                    updateanorder();
                     break;
             case 4:
+                    deleteanorder();
                     break;
             case 0:
             system("cls");
