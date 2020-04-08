@@ -1,6 +1,22 @@
 #include <iostream>
 using namespace std;
 
+void createOrder() {
+
+}
+
+void readallOrders() {
+
+}
+
+void deleteanorder() {
+
+}
+
+void updateanorder() {
+
+}
+
 void startuptext() {
     cout << "Welcome to our gun shop programme!\n";
     cout << "What would you like to do" << endl;
