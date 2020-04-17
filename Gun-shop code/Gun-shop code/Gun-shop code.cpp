@@ -6,12 +6,17 @@ struct USER
 	string fname;
 	string sname;
 	string lname;
-	long int USN; //UNIQUE SITIZEN NUMBER (ЕГН)
 	long int telephone_number;
-	bool license;
+	long int USN; //UNIQUE SITIZEN NUMBER (ЕГН)
 };
 
+enum LICENSES{license1, license2, license3};
+
 void createOrder() {
+
+}
+
+void findOrder() {
 
 }
 
