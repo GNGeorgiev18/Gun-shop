@@ -1,5 +1,15 @@
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
+
+struct USER
+{
+	string fname;
+	string sname;
+	string lname;
+	long int USN; //UNIQUE SITIZEN NUMBER (ЕГН)
+	long int telephone_number;
+	bool license;
+};
 
 void createOrder() {
 
