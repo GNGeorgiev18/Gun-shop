@@ -1,43 +1,73 @@
 ﻿#include <iostream>
 using namespace std;
 
-struct USER
+struct USER;
 {
 	string fname;
 	string sname;
 	string lname;
 	long int telephone_number;
 	long int USN; //UNIQUE SITIZEN NUMBER (ЕГН)
+	enum LICENSES license;
 };
 
-enum LICENSES{license1, license2, license3};
+USER user[10];
 
-void createOrder() {
+enum LICENSES{license1, license2, license3, none};
+
+void checkUser()
+{
+	cout << "First Name: ";
+	cin >> user[0].fname;
+	cout << "Second Name: ";
+	cin >> user.sname;
+	cout << "Last Name: ";
+	cin >> user.lname;
+	cout << "First telephone_number: ";
+	cin >> user.telephone_number;
+	cout << "USN: ";
+	cin >> user.USN;
+	
+}
+
+void createOrder() 
+{
 
 }
 
-void findOrder() {
+void deleteanorder() 
+{
 
 }
 
-void readallOrders() {
+void sortprice()
+{
 
 }
 
-void deleteanorder() {
+void findOrder() 
+{
 
 }
 
-void updateanorder() {
+void readallOrders() 
+{
 
 }
 
-void startup() {
+void updateanorder() 
+{
+
+}
+
+void startup() 
+{
     cout << "Welcome to our gun shop programme!\n";
     cout << "What would you like to do" << endl;
 }
 
-void startuptext() {
+void startuptext() 
+{
     cout << "1. Create a gun order." << endl;
     cout << "2. Show all your gun orders." << endl;
     cout << "3. Update an order." << endl;
@@ -47,13 +77,17 @@ void startuptext() {
 
 int main()
 {
-    int ans;
+	int ans{};
     startup();
-    while (true) {
+	user[0] = { "Ivan", "Stoikov", "Sotirov", "0887405818", "0123456789" };
+    while (true) 
+	{
         startuptext();
-        switch(ans) {
+		cin >> ans;
+        switch(ans) 
+		{
             case 1:
-                    createOrder();
+                    checkUser();
                     break;
             case 2:
                     readallOrders();
