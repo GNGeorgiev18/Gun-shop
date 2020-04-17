@@ -14,9 +14,20 @@ struct USER
 	enum LICENSES license;
 };
 
+struct GUN {
+	string name;
+	TYPE type;
+	double value;
+};
+
 USER user[10];
+GUN allguns[45];
 
 enum LICENSES { license1, license2, license3, none };
+enum TYPE { Pistol, Rifle, SMG, Shotgun };
+
+
+
 
 
 string couttypes(LICENSES ae) {
@@ -144,6 +155,18 @@ void startuptext()
 
 int main()
 {
+
+	// Gun Variables
+	allguns[0] = { "SD9 VE",Pistol,395.00 };
+	allguns[1] = { "Glock 18",Pistol,3000.00 };
+	allguns[2] = { "Springfield Hellcat",Pistol,569.00 };
+	allguns[3] = { "Colt M4 CQB", SMG, 1225.00 };
+	allguns[4] = { "Colt M4 Commando", SMG, 1099.00 };
+	allguns[5] = { "FN M249 Para", SMG , 7899.00 };
+	allguns[6] = { "Beretta 1301", Shotgun, 930.00 };
+	allguns[7] = { "Remington 870P", Shotgun, 545.00 };
+	allguns[8] = { "" }
+		//--
 	int ans{};
 	startup();
 	user[0] = { "Ivan", "Stoikov", "Sotirov", "0887405818", "0123456789",license2 };
