@@ -22,17 +22,17 @@ struct GUN {
 
 ///Global Variables
 
-USER user[10];
-USER loggedin;
-GUN allguns[45];
+USER user[10]; // All Users
+USER loggedin; // The person that is logged in.
+GUN allguns[45]; // All the guns!
 
-enum LICENSES { license1, license2, license3 };
-enum TYPE { Pistol, Rifle, SMG, Shotgun };
+enum LICENSES { license1, license2, license3 }; // All Licenses
+enum TYPE { Pistol, Rifle, SMG, Shotgun }; // Types Of Guns
 
-bool IsRegistered = false;
+bool IsRegistered = false; // /If anybody is loggged in
 
 
-string couttypes(LICENSES ae) {
+string couttypes(LICENSES ae) { // Counts and returns in string the type of License.
 	if (ae == license1) {
 		return "Low Caliber";
 	}
@@ -46,7 +46,7 @@ string couttypes(LICENSES ae) {
 
 
 
-bool check_usn(string usn, USER userask) { 
+bool check_usn(string usn, USER userask) {  // Checks the USN (EGN) 
 
 	if (userask.USN == usn) {
 		return true;
@@ -56,7 +56,7 @@ bool check_usn(string usn, USER userask) {
 	}
 }
 
-bool checkt_number(string num, USER userask) {
+bool checkt_number(string num, USER userask) { // Checks Telephone Number
 
 	if (userask.telephone_number == num) {
 		return true;
@@ -66,7 +66,7 @@ bool checkt_number(string num, USER userask) {
 	}
 }
 
-bool check_names(string one, string two, string three) {
+bool check_names(string one, string two, string three) { // Checks inputed names if they exist. They return bool typee.
 	for (int i = 0; i <= 10; i++)
 	{
 		if (user[i].fname == one and user[i].sname == two and user[i].lname == three) {
@@ -76,7 +76,7 @@ bool check_names(string one, string two, string three) {
 	return false;
 }
 
-USER getUserbyNames(string f, string s, string l) {
+USER getUserbyNames(string f, string s, string l) { // Gets Useer by all of the names.
 	for (int i = 0; i <= 10; i++)
 	{
 		if (user[i].fname == f, user[i].sname == s, user[i].lname == l) {
@@ -85,7 +85,7 @@ USER getUserbyNames(string f, string s, string l) {
 	}
 }
 
-void checkLicense()
+void checkLicense() // Checks if the person has license.
 {
 	string name1, name2, name3, usn, num;
 	cout << "Type First Second and Last Name: ";
@@ -175,20 +175,20 @@ int main()
 	allguns[2] = { "Springfield Hellcat",Pistol,569.00 };
 	allguns[3] = { "Colt M4 CQB", SMG, 1225.00 };
 	allguns[4] = { "Colt M4 Commando", SMG, 1099.00 };
-
 	allguns[5] = { "FN M249 Para", SMG , 7899.00 };
 	allguns[6] = { "Beretta 1301", Shotgun, 930.00 };
 	allguns[7] = { "Remington 870P", Shotgun, 545.00 };
 	//--
 	int ans{};
 	startup();
+	// All Users
 	user[0] = { "Ivan", "Stoikov", "Sotirov", "0887405818", "0123456789",license2 };
 	user[1] = { "Georgi", "Georgiev", "Sotirov", "0884568312", "0832340987",license1 };
 	user[2] = { "Ivailo", "Ivanov", "Bonev", "0884378475", "3928930495",license2 };
 	user[3] = { "Angel", "Iordanov", "Dimov", "0883758473", "3748329282",license3 };
 	user[4] = { "Qnislav", "Tihomirov", "Atanasov", "0888378234", "3456789345",license1 };
 	user[5] = { "Angel", "Veselinov", "Zhelyazkov", "0888888888", "1234567890", license3};
-	user[6] = { "Gosho", "Georgiev", "Georgiev", "0887777777","2345678901",license3 };
+	user[6] = { "Georgi", "Georgiev", "Georgiev", "0887777777","2345678901",license3 };
 
 	while (true)
 	{
