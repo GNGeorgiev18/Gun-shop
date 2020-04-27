@@ -20,6 +20,12 @@ struct GUN {
 	double value;
 };
 
+struct ORDER {
+	string creator;
+	GUN guns[3];
+	string status;
+};
+
 ///Global Variables
 
 USER user[10]; // All Users
@@ -115,8 +121,31 @@ void checkLicense() // Checks if the person has license.
 	cout << endl << endl;
 }
 
+void showGuns()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		cout << i+1 <<". "<< allguns[i].name << " = " << "$" << allguns[i].value << endl;
+	}
+	return;
+}
+
 void createOrder()
 {
+	cout << "1. Select a gun!" << endl;
+	cout << "2. Delete a gun from order!" << endl;
+	cout << "3. Proceed to checkout!" << endl;
+	int input;
+	cin >> input;
+	switch (input)
+	{
+	case 1:
+	{
+		system("CLS");
+		showGuns();
+		cout << endl;
+	}
+	}
 
 }
 
