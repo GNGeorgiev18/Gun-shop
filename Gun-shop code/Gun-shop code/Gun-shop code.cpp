@@ -46,7 +46,7 @@ string couttypes(LICENSES ae) {
 
 
 
-bool check_usn(string usn, USER userask) {
+bool check_usn(string usn, USER userask) { 
 
 	if (userask.USN == usn) {
 		return true;
@@ -187,6 +187,9 @@ int main()
 	user[2] = { "Ivailo", "Ivanov", "Bonev", "0884378475", "3928930495",license2 };
 	user[3] = { "Angel", "Iordanov", "Dimov", "0883758473", "3748329282",license3 };
 	user[4] = { "Qnislav", "Tihomirov", "Atanasov", "0888378234", "3456789345",license1 };
+	user[5] = { "Angel", "Veselinov", "Zhelyazkov", "0888888888", "1234567890", license3};
+	user[6] = { "Gosho", "Georgiev", "Georgiev", "0887777777","2345678901",license3 };
+
 	while (true)
 	{
 		if (IsRegistered == false) {
