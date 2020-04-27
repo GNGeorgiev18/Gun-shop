@@ -16,18 +16,20 @@ struct USER
 
 struct GUN {
 	string name;
-	TYPE type;
+	enum TYPE type;
 	double value;
 };
 
+///Global Variables
+
 USER user[10];
+USER loggedin;
 GUN allguns[45];
 
-enum LICENSES { license1, license2, license3, none };
+enum LICENSES { license1, license2, license3 };
 enum TYPE { Pistol, Rifle, SMG, Shotgun };
 
-
-
+bool IsRegistered = false;
 
 
 string couttypes(LICENSES ae) {
@@ -89,15 +91,20 @@ void checkLicense()
 	cout << "Type First Second and Last Name: ";
 	cin >> name1 >> name2 >> name3;
 	if (check_names(name1, name2, name3) == true) {
+		system("CLS");
 		USER you = getUserbyNames(name1, name2, name3);
 		string numb;
 		cout << "Enter USN: "; cin >> numb;
 		system("cls");
 		cout << endl << "License: ";
 		if (check_usn(numb, you) == true) {
-			cout << couttypes(you.license);
+			loggedin = you;
+			cout << couttypes(you.license) << endl;
+			cout << "Welcome " << you.fname << "!" << endl;
+			IsRegistered = true;
 		}
 		else {
+			IsRegistered = false;
 			cout << "None";
 		}
 	}
@@ -144,14 +151,20 @@ void startup()
 	cout << "What would you like to do" << endl;
 }
 
+
 void startuptext()
 {
-	cout << "1. Create a gun order." << endl;
-	cout << "2. Show all your gun orders." << endl;
-	cout << "3. Update an order." << endl;
-	cout << "4. Delete an order." << endl;
+	cout << "1. Log in a member and check license." << endl;
 	cout << "0. Exit." << endl;
 }
+
+void ordertext() {
+	cout << "1. Create an Order" << endl;
+	cout << "2. Show Orders" << endl;
+	cout << "3. Delete an Order" << endl;
+	cout << "0. Exit the account" << endl;
+}
+
 
 int main()
 {
@@ -162,11 +175,11 @@ int main()
 	allguns[2] = { "Springfield Hellcat",Pistol,569.00 };
 	allguns[3] = { "Colt M4 CQB", SMG, 1225.00 };
 	allguns[4] = { "Colt M4 Commando", SMG, 1099.00 };
+
 	allguns[5] = { "FN M249 Para", SMG , 7899.00 };
 	allguns[6] = { "Beretta 1301", Shotgun, 930.00 };
 	allguns[7] = { "Remington 870P", Shotgun, 545.00 };
-	allguns[8] = { "" }
-		//--
+	//--
 	int ans{};
 	startup();
 	user[0] = { "Ivan", "Stoikov", "Sotirov", "0887405818", "0123456789",license2 };
@@ -176,26 +189,61 @@ int main()
 	user[4] = { "Qnislav", "Tihomirov", "Atanasov", "0888378234", "3456789345",license1 };
 	while (true)
 	{
-		startuptext();
-		cin >> ans;
-		switch (ans)
-		{
-		case 1:
-			checkLicense();
-			break;
-		case 2:
-			readallOrders();
-			break;
-		case 3:
-			updateanorder();
-			break;
-		case 4:
-			deleteanorder();
-			break;
-		case 0:
-			system("cls");
-			cout << "Thank you for using our program!";
-			return 0;
+		if (IsRegistered == false) {
+			startuptext();
 		}
+		else {
+			ordertext();
+		}
+
+		cin >> ans;
+
+		if (IsRegistered != true) {
+			switch (ans)
+			{
+			case 1: {
+				checkLicense();
+				break;
+			}
+			case 0: {
+				system("cls");
+				cout << "Thank you for using our program!";
+				return 0;
+			}
+			default: {
+				continue;
+			}
+			}
+		}
+		else {
+			switch (ans)
+			{
+			case 1: {
+				createOrder();
+				break;
+			}
+			case 2: {
+				readallOrders();
+				break;
+			}
+
+			case 3: {
+				updateanorder();
+				break;
+			}
+			case 4: {
+				deleteanorder();
+				break;
+			}
+			case 0: {
+				cout << "User has logged out!";
+				IsRegistered = false;
+			}
+			default: {
+				continue;
+			}
+			}
+		}
+
 	}
 }
