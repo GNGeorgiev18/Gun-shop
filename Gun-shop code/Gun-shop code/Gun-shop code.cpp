@@ -169,8 +169,8 @@ void createOrder()
 		cin >> input;
 		switch (input)
 		{
-		case 1:
-		{
+		 case 1:
+		 {
 			int gun1;
 			system("CLS");
 			showGuns();
@@ -189,9 +189,9 @@ void createOrder()
 				}
 			}
 			break;
-		}
-		case 2:
-		{
+		 }
+		 case 2:
+		 {
 			int gun1;
 			system("CLS");
 			for (int i = 0; i < amount; i++)
@@ -204,17 +204,17 @@ void createOrder()
 			{
 				if (i == gun1)
 				{
-					for (int j = 0; j < 3; j++)
+					for (int j = i; j < 3; j++)
 					{
-						orders[num].guns[j - 1] = orders[num].guns[j];
+						orders[num].guns[j-1] = orders[num].guns[j];
 					}
+					amount--;
 					break;
-
 				}
 			}
 			break;
-		}
-		}
+		  }
+		 }
 	}
 }
 
