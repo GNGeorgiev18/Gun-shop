@@ -21,9 +21,9 @@ struct GUN {
 };
 
 struct ORDER {
-	string creator;
+	USER creator;
 	GUN guns[3];
-	string status;
+	int total = 0;
 	bool isCreated = false;
 };
 
@@ -38,6 +38,16 @@ enum LICENSES { license1, license2, license3 }; // All Licenses
 enum TYPE { Pistol, Rifle, SMG, Shotgun }; // Types Of Guns
 
 bool IsRegistered = false; // /If anybody is loggged in
+
+
+void minuses(int amount) {
+	cout << endl;
+	for (int i = 1; i <= amount; i++) {
+		cout << "-";
+	}
+	cout << endl;
+}
+
 
 
 string couttypes(LICENSES ae) { // Counts and returns in string the type of License.
@@ -156,15 +166,34 @@ int getNullOrder()
 	return -1;
 }
 
+void cleanOrder(int id) {
+	GUN emptygun = {};
+	orders[id].total = 0;
+	for (int i = 0; i < 3; i++)
+		orders[id].guns[i] = emptygun;
+}
+
+
 void createOrder()
 {
+	GUN emptygun = {};
 	int num = getNullOrder();
+	if (num == -1) {
+		minuses(50);
+		cout << "All orders are full!" << endl;
+		minuses(50);
+		return;
+	}
 	int amount = 0;
+	int total = 0;
 	while (true)
 	{
+		minuses(50);
 		cout << "1. Select a gun!" << endl;
 		cout << "2. Cancel a gun!" << endl;
 		cout << "3. Proceed to checkout!" << endl;
+		cout << "0. Cancel the Order." << endl;
+		minuses(50);
 		int input;
 		cin >> input;
 		switch (input)
@@ -172,8 +201,11 @@ void createOrder()
 		 case 1:
 		 {
 			int gun1;
+			if (amount >= 3) { minuses(50); cout << "Only 3 Guns are allowed per user to buy." << endl; minuses(50); break; }
 			system("CLS");
+			minuses(50);
 			showGuns();
+			minuses(50);
 			cout << endl;
 			cin >> gun1;
 			if (isNullOrder() == true && amount < 3)
@@ -184,7 +216,10 @@ void createOrder()
 					{
 						orders[num].guns[amount] = allguns[i-1];
 						amount++;
+						total += allguns[i - 1].value;
+						minuses(50);
 						cout << "Gun has been added!" << endl;
+						minuses(50);
 					}
 				}
 			}
@@ -193,28 +228,72 @@ void createOrder()
 		 case 2:
 		 {
 			int gun1;
-			system("CLS");
-			for (int i = 0; i < amount; i++)
-			{
-				cout << orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
+			if (amount <= 0) {
+				minuses(50);
+				cout << "No guns Found in the Cart!" << endl;
+				minuses(50);
+				break;
 			}
-			cout << endl;
-			cin >> gun1;
+			system("CLS");
+			minuses(50);
 			for (int i = 0; i < amount; i++)
 			{
-				if (i == gun1)
-				{
-					for (int j = i; j < 3; j++)
-					{
-						orders[num].guns[j-1] = orders[num].guns[j];
-					}
-					amount--;
-					break;
+				cout <<i+1<<". " <<orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
+			}
+			minuses(50);
+			cout << "Please enter a gun's position number." << endl;
+			cin >> gun1;
+			minuses(50);
+			for (int i = gun1; i <= amount; i++)
+			{
+				if (i != amount) {
+                    orders[num].guns[i-1] = orders[num].guns[i];
+				} else {
+					orders[num].guns[i] = emptygun;
 				}
+				amount--;
+				total -= allguns[gun1 - 1].value;
+				minuses(50);
+				cout << "Gun has been removed." << endl;
+				minuses(50);
 			}
 			break;
 		  }
+		 case 3: 
+		 {
+			 if (amount <= 0) { minuses(50); cout << "No guns have been added to the cart!" << endl; minuses(50); break; }
+			 minuses(50);
+			 cout << "Would you like to purchase the following guns: " << endl;
+			 for (int i = 0; i < amount; i++)
+				 cout << orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
+			 cout << endl << endl;
+			 minuses(50);
+			 minuses(50);
+			 cout << "Total: " << total << endl;
+			 minuses(50);
+			 cout << "1. Yes" << endl << "2. No" << endl;
+			 int a; cin >> a;
+			 minuses(50);
+			 switch (a) {
+			  case 1: {
+				  orders[num].creator = loggedin;
+				  orders[num].isCreated = true;
+				  cout << endl << "The order has been created!" << endl;
+				  minuses(50);
+				  break;
+			  }
+			  case 2: {
+				  cout << endl << "The order has been canceled." << endl;
+				  cleanOrder(num);
+			  }
+			 }
 		 }
+		 case 0: {
+			 cleanOrder(num);
+			 cout << endl << "Order has been canceled!" << endl;
+		 }
+		}
+		 
 	}
 }
 
@@ -223,7 +302,7 @@ void deleteanorder()
 
 }
 
-void sortprice()
+void sortOrdersByPrice()
 {
 
 }
@@ -235,7 +314,19 @@ void findOrder()
 
 void readallOrders()
 {
-
+	cout << "All Orders: " << endl;
+	minuses(50);
+	if (orders[0].isCreated == false) {
+		cout << "No orders have been made yet!" << endl;
+		minuses(50);
+		return;
+	}
+	for (int i = 0; i < 10; i++) {
+		if (orders[i].isCreated == true) {
+			cout << "Order #" << i << "  [" << orders[i].creator.fname << "]  " << " - $" << orders[i].total;
+		}
+	}
+	minuses(50);
 }
 
 void updateanorder()
@@ -243,6 +334,7 @@ void updateanorder()
 
 }
 
+//A bunch of texts
 void startup()
 {
 	cout << "Welcome to our gun shop programme!\n";
