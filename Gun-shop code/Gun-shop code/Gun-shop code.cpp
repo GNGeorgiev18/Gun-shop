@@ -24,6 +24,7 @@ struct ORDER {
 	string creator;
 	GUN guns[3];
 	string status;
+	bool isCreated = false;
 };
 
 ///Global Variables
@@ -31,6 +32,7 @@ struct ORDER {
 USER user[10]; // All Users
 USER loggedin; // The person that is logged in.
 GUN allguns[45]; // All the guns!
+ORDER orders[10]; //All the orders!
 
 enum LICENSES { license1, license2, license3 }; // All Licenses
 enum TYPE { Pistol, Rifle, SMG, Shotgun }; // Types Of Guns
@@ -130,10 +132,33 @@ void showGuns()
 	return;
 }
 
+bool isNullOrder()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (orders[i].isCreated != true)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+ORDER getNullOrder()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (orders[i].isCreated!=true)
+		{
+			return orders[i];
+		}
+	}
+}
+
 void createOrder()
 {
 	cout << "1. Select a gun!" << endl;
-	cout << "2. Delete a gun from order!" << endl;
+	cout << "2. Cancel a gun!" << endl;
 	cout << "3. Proceed to checkout!" << endl;
 	int input;
 	cin >> input;
@@ -141,9 +166,21 @@ void createOrder()
 	{
 	case 1:
 	{
+		int gun1;
 		system("CLS");
 		showGuns();
 		cout << endl;
+		cin >> gun1;
+		if (isNullOrder() == true)
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				if (gun1 == i)
+				{
+					getNullOrder();
+				}
+			}
+		}
 	}
 	}
 
@@ -227,7 +264,7 @@ int main()
 		else {
 			ordertext();
 		}
-
+		
 		cin >> ans;
 
 		if (IsRegistered != true) {
