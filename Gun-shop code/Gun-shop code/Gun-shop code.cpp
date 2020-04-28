@@ -62,7 +62,16 @@ string couttypes(LICENSES ae) { // Counts and returns in string the type of Lice
 	}
 }
 
-
+string numWord(int input) {
+	if (input == 1)
+		return "st";
+	if (input == 2)
+		return "nd";
+	if (input == 3)
+		return "rd";
+	if (input > 3)
+		return "th";
+}
 
 bool check_usn(string usn, USER userask) {  // Checks the USN (EGN) 
 
@@ -85,7 +94,7 @@ bool checkt_number(string num, USER userask) { // Checks Telephone Number
 }
 
 bool check_names(string one, string two, string three) { // Checks inputed names if they exist. They return bool typee.
-	for (int i = 0; i <= 10; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		if (user[i].fname == one and user[i].sname == two and user[i].lname == three) {
 			return true;
@@ -95,7 +104,7 @@ bool check_names(string one, string two, string three) { // Checks inputed names
 }
 
 USER getUserbyNames(string f, string s, string l) { // Gets Useer by all of the names.
-	for (int i = 0; i <= 10; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		if (user[i].fname == f, user[i].sname == s, user[i].lname == l) {
 			return user[i];
@@ -133,7 +142,7 @@ void checkLicense() // Checks if the person has license.
 	cout << endl << endl;
 }
 
-void showGuns()
+void showGuns() // Shows out the guns
 {
 	for (int i = 0; i < 10; i++)
 	{
@@ -142,7 +151,16 @@ void showGuns()
 	return;
 }
 
-bool isNullOrder()
+void showOrders() { // Shows all Orders that have vales
+	for (int i = 0; i < 10; i++) {
+		if (orders[i].isCreated != false) {
+			cout << "Order #" << i + 1 << "  [" << orders[i].creator.fname << "]  " << " - $" << orders[i].total << endl;
+		}
+	}
+}
+
+
+bool isNullOrder() //  Checks if there is an empty order slot
 {
 	for (int i = 0; i < 10; i++)
 	{
@@ -154,11 +172,11 @@ bool isNullOrder()
 	return false;
 }
 
-int getNullOrder()
+int getNullOrder() // Find an order that is NULL
 {
 	for (int i = 0; i < 10; i++)
 	{
-		if (orders[i].isCreated!=true)
+		if (orders[i].isCreated == false)
 		{
 			return i;
 		}
@@ -166,7 +184,17 @@ int getNullOrder()
 	return -1;
 }
 
-void cleanOrder(int id) {
+int countAllOrders() {
+	int counter = 0;
+	for (int i = 0; i < 10; i++) {
+		if (orders[i].isCreated == true) {
+			counter++;
+		}
+	}
+	return counter;
+}
+
+void cleanOrder(int id) { // Deletes Edited Stuff in an Order
 	GUN emptygun = {};
 	orders[id].total = 0;
 	for (int i = 0; i < 3; i++)
@@ -240,10 +268,15 @@ void createOrder()
 			{
 				cout <<i+1<<". " <<orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
 			}
+
+
 			minuses(50);
 			cout << "Please enter a gun's position number." << endl;
 			cin >> gun1;
 			minuses(50);
+			
+			if (gun1 > amount) { minuses(50); cout << "Please enter a valid gun slot!"; minuses(50); }
+			
 			for (int i = gun1; i <= amount; i++)
 			{
 				if (i != amount) {
@@ -269,7 +302,7 @@ void createOrder()
 			 cout << endl << endl;
 			 minuses(50);
 			 minuses(50);
-			 cout << "Total: " << total << endl;
+			 cout << "Total: $" << total << endl;
 			 minuses(50);
 			 cout << "1. Yes" << endl << "2. No" << endl;
 			 int a; cin >> a;
@@ -278,28 +311,52 @@ void createOrder()
 			  case 1: {
 				  orders[num].creator = loggedin;
 				  orders[num].isCreated = true;
+				  orders[num].total = total;
 				  cout << endl << "The order has been created!" << endl;
 				  minuses(50);
-				  break;
+				  return;
 			  }
 			  case 2: {
 				  cout << endl << "The order has been canceled." << endl;
 				  cleanOrder(num);
+				  break;
 			  }
 			 }
+			 break;
 		 }
 		 case 0: {
 			 cleanOrder(num);
 			 cout << endl << "Order has been canceled!" << endl;
+			 break;
 		 }
 		}
-		 
 	}
 }
 
 void deleteanorder()
 {
+	ORDER emptyOrder = {};
+	minuses(50);
+	showOrders();
+	minuses(50);
 
+	cout << "Which order would you like to delete?" << endl;
+	cout << "Please answer with the beggining number of the order!" << endl;
+
+	minuses(50);
+	int ans; cin >> ans;
+	minuses(50);
+
+	if (orders[ans - 1].isCreated == false) { minuses(50); cout << "The " << ans << numWord(ans) << " order has not been found."; minuses(50); }
+
+	for (int i = ans; i <= countAllOrders() + 1; i++) {
+		if (i != countAllOrders()) {
+			orders[i - 1] = orders[i];
+		} else {
+			orders[i-1] = emptyOrder;
+		}
+	}
+	cout << "The " << ans<<numWord(ans) <<" order has been removed.";
 }
 
 void sortOrdersByPrice()
@@ -323,7 +380,7 @@ void readallOrders()
 	}
 	for (int i = 0; i < 10; i++) {
 		if (orders[i].isCreated == true) {
-			cout << "Order #" << i << "  [" << orders[i].creator.fname << "]  " << " - $" << orders[i].total;
+			cout << "Order #" << i + 1 << "  [" << orders[i].creator.fname << "]  " << " - $" << orders[i].total << endl;
 		}
 	}
 	minuses(50);
@@ -422,16 +479,15 @@ int main()
 			}
 
 			case 3: {
-				updateanorder();
-				break;
-			}
-			case 4: {
 				deleteanorder();
 				break;
 			}
 			case 0: {
+				minuses(50);
 				cout << "User has logged out!";
+				minuses(50);
 				IsRegistered = false;
+				break;
 			}
 			default: {
 				continue;
