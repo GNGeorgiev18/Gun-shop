@@ -144,46 +144,78 @@ bool isNullOrder()
 	return false;
 }
 
-ORDER getNullOrder()
+int getNullOrder()
 {
 	for (int i = 0; i < 10; i++)
 	{
 		if (orders[i].isCreated!=true)
 		{
-			return orders[i];
+			return i;
 		}
 	}
+	return -1;
 }
 
 void createOrder()
 {
-	cout << "1. Select a gun!" << endl;
-	cout << "2. Cancel a gun!" << endl;
-	cout << "3. Proceed to checkout!" << endl;
-	int input;
-	cin >> input;
-	switch (input)
+	int num = getNullOrder();
+	int amount = 0;
+	while (true)
 	{
-	case 1:
-	{
-		int gun1;
-		system("CLS");
-		showGuns();
-		cout << endl;
-		cin >> gun1;
-		if (isNullOrder() == true)
+		cout << "1. Select a gun!" << endl;
+		cout << "2. Cancel a gun!" << endl;
+		cout << "3. Proceed to checkout!" << endl;
+		int input;
+		cin >> input;
+		switch (input)
 		{
-			for (int i = 0; i < 10; i++)
+		case 1:
+		{
+			int gun1;
+			system("CLS");
+			showGuns();
+			cout << endl;
+			cin >> gun1;
+			if (isNullOrder() == true && amount < 3)
 			{
-				if (gun1 == i)
+				for (int i = 0; i < 10; i++)
 				{
-					getNullOrder();
+					if (gun1 == i)
+					{
+						orders[num].guns[amount] = allguns[i-1];
+						amount++;
+						cout << "Gun has been added!" << endl;
+					}
 				}
 			}
+			break;
+		}
+		case 2:
+		{
+			int gun1;
+			system("CLS");
+			for (int i = 0; i < amount; i++)
+			{
+				cout << orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
+			}
+			cout << endl;
+			cin >> gun1;
+			for (int i = 0; i < amount; i++)
+			{
+				if (i == gun1)
+				{
+					for (int j = 0; j < 3; j++)
+					{
+						orders[num].guns[j - 1] = orders[num].guns[j];
+					}
+					break;
+
+				}
+			}
+			break;
+		}
 		}
 	}
-	}
-
 }
 
 void deleteanorder()
@@ -254,7 +286,8 @@ int main()
 	user[3] = { "Angel", "Iordanov", "Dimov", "0883758473", "3748329282",license3 };
 	user[4] = { "Qnislav", "Tihomirov", "Atanasov", "0888378234", "3456789345",license1 };
 	user[5] = { "Angel", "Veselinov", "Zhelyazkov", "0888888888", "1234567890", license3};
-	user[6] = { "Georgi", "Georgiev", "Georgiev", "0887777777","2345678901",license3 };
+	user[6] = { "Georgi", "Nedqlkov", "Georgiev", "0887777777","2345678901",license3 };
+	user[7] = { "admin", "admin", "admin", "1","1",license3 };
 
 	while (true)
 	{
