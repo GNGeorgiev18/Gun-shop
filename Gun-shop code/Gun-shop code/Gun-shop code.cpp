@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -146,7 +146,7 @@ void showGuns() // Shows out the guns
 {
 	for (int i = 0; i < 10; i++)
 	{
-		cout << i+1 <<". "<< allguns[i].name << " = " << "$" << allguns[i].value << endl;
+		cout << i + 1 << ". " << allguns[i].name << " = " << "$" << allguns[i].value << endl;
 	}
 	return;
 }
@@ -226,8 +226,8 @@ void createOrder()
 		cin >> input;
 		switch (input)
 		{
-		 case 1:
-		 {
+		case 1:
+		{
 			int gun1;
 			if (amount >= 3) { minuses(50); cout << "Only 3 Guns are allowed per user to buy." << endl; minuses(50); break; }
 			system("CLS");
@@ -242,7 +242,7 @@ void createOrder()
 				{
 					if (gun1 == i)
 					{
-						orders[num].guns[amount] = allguns[i-1];
+						orders[num].guns[amount] = allguns[i - 1];
 						amount++;
 						total += allguns[i - 1].value;
 						minuses(50);
@@ -252,9 +252,9 @@ void createOrder()
 				}
 			}
 			break;
-		 }
-		 case 2:
-		 {
+		}
+		case 2:
+		{
 			int gun1;
 			if (amount <= 0) {
 				minuses(50);
@@ -266,7 +266,7 @@ void createOrder()
 			minuses(50);
 			for (int i = 0; i < amount; i++)
 			{
-				cout <<i+1<<". " <<orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
+				cout << i + 1 << ". " << orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
 			}
 
 
@@ -274,14 +274,15 @@ void createOrder()
 			cout << "Please enter a gun's position number." << endl;
 			cin >> gun1;
 			minuses(50);
-			
+
 			if (gun1 > amount) { minuses(50); cout << "Please enter a valid gun slot!"; minuses(50); }
-			
+
 			for (int i = gun1; i <= amount; i++)
 			{
 				if (i != amount) {
-                    orders[num].guns[i-1] = orders[num].guns[i];
-				} else {
+					orders[num].guns[i - 1] = orders[num].guns[i];
+				}
+				else {
 					orders[num].guns[i] = emptygun;
 				}
 				amount--;
@@ -291,44 +292,44 @@ void createOrder()
 				minuses(50);
 			}
 			break;
-		  }
-		 case 3: 
-		 {
-			 if (amount <= 0) { minuses(50); cout << "No guns have been added to the cart!" << endl; minuses(50); break; }
-			 minuses(50);
-			 cout << "Would you like to purchase the following guns: " << endl;
-			 for (int i = 0; i < amount; i++)
-				 cout << orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
-			 cout << endl << endl;
-			 minuses(50);
-			 minuses(50);
-			 cout << "Total: $" << total << endl;
-			 minuses(50);
-			 cout << "1. Yes" << endl << "2. No" << endl;
-			 int a; cin >> a;
-			 minuses(50);
-			 switch (a) {
-			  case 1: {
-				  orders[num].creator = loggedin;
-				  orders[num].isCreated = true;
-				  orders[num].total = total;
-				  cout << endl << "The order has been created!" << endl;
-				  minuses(50);
-				  return;
-			  }
-			  case 2: {
-				  cout << endl << "The order has been canceled." << endl;
-				  cleanOrder(num);
-				  break;
-			  }
-			 }
-			 break;
-		 }
-		 case 0: {
-			 cleanOrder(num);
-			 cout << endl << "Order has been canceled!" << endl;
-			 break;
-		 }
+		}
+		case 3:
+		{
+			if (amount <= 0) { minuses(50); cout << "No guns have been added to the cart!" << endl; minuses(50); break; }
+			minuses(50);
+			cout << "Would you like to purchase the following guns: " << endl;
+			for (int i = 0; i < amount; i++)
+				cout << orders[num].guns[i].name << " - $" << orders[num].guns[i].value << endl;
+			cout << endl << endl;
+			minuses(50);
+			minuses(50);
+			cout << "Total: $" << total << endl;
+			minuses(50);
+			cout << "1. Yes" << endl << "2. No" << endl;
+			int a; cin >> a;
+			minuses(50);
+			switch (a) {
+			case 1: {
+				orders[num].creator = loggedin;
+				orders[num].isCreated = true;
+				orders[num].total = total;
+				cout << endl << "The order has been created!" << endl;
+				minuses(50);
+				return;
+			}
+			case 2: {
+				cout << endl << "The order has been canceled." << endl;
+				cleanOrder(num);
+				break;
+			}
+			}
+			break;
+		}
+		case 0: {
+			cleanOrder(num);
+			cout << endl << "Order has been canceled!" << endl;
+			break;
+		}
 		}
 	}
 }
@@ -352,21 +353,12 @@ void deleteanorder()
 	for (int i = ans; i <= countAllOrders() + 1; i++) {
 		if (i != countAllOrders()) {
 			orders[i - 1] = orders[i];
-		} else {
-			orders[i-1] = emptyOrder;
+		}
+		else {
+			orders[i - 1] = emptyOrder;
 		}
 	}
-	cout << "The " << ans<<numWord(ans) <<" order has been removed.";
-}
-
-void sortOrdersByPrice()
-{
-
-}
-
-void findOrder()
-{
-
+	cout << "The " << ans << numWord(ans) << " order has been removed." << endl;
 }
 
 void readallOrders()
@@ -434,7 +426,7 @@ int main()
 	user[2] = { "Ivailo", "Ivanov", "Bonev", "0884378475", "3928930495",license2 };
 	user[3] = { "Angel", "Iordanov", "Dimov", "0883758473", "3748329282",license3 };
 	user[4] = { "Qnislav", "Tihomirov", "Atanasov", "0888378234", "3456789345",license1 };
-	user[5] = { "Angel", "Veselinov", "Zhelyazkov", "0888888888", "1234567890", license3};
+	user[5] = { "Angel", "Veselinov", "Zhelyazkov", "0888888888", "1234567890", license3 };
 	user[6] = { "Georgi", "Nedqlkov", "Georgiev", "0887777777","2345678901",license3 };
 	user[7] = { "admin", "admin", "admin", "1","1",license3 };
 
@@ -446,7 +438,7 @@ int main()
 		else {
 			ordertext();
 		}
-		
+
 		cin >> ans;
 
 		if (IsRegistered != true) {
