@@ -377,12 +377,6 @@ void readallOrders()
 	}
 	minuses(50);
 }
-
-void updateanorder()
-{
-
-}
-
 //A bunch of texts
 void startup()
 {
