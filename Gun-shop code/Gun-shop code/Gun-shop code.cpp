@@ -122,17 +122,6 @@ void checkLicense() // Checks if the person has license.
 		USER you = getUserbyNames(name1, name2, name3);
 		string numb;
 		cout << "Enter USN: "; cin >> numb;
-		while (cin.fail()) {
-
-			cout << "Enter a number, please!" << endl;
-
-			cin.clear();
-
-			cin.ignore(256, '\n');
-
-			cin >> EnteredNumbers[0];
-
-		}
 		system("cls");
 		cout << endl << "License: ";
 		if (check_usn(numb, you) == true) {
@@ -243,7 +232,7 @@ void createOrder()
 
 			cin.ignore(256, '\n');
 
-			cin >> EnteredNumbers[0];
+			cin >> input;
 
 		}
 		switch (input)
@@ -266,7 +255,7 @@ void createOrder()
 
 				cin.ignore(256, '\n');
 
-				cin >> EnteredNumbers[0];
+				cin >> gun1;
 
 			}
 			if (isNullOrder() == true && amount < 3)
@@ -314,7 +303,7 @@ void createOrder()
 
 				cin.ignore(256, '\n');
 
-				cin >> EnteredNumbers[0];
+				cin >> gun1;
 
 			}
 			minuses(50);
@@ -359,7 +348,7 @@ void createOrder()
 
 				cin.ignore(256, '\n');
 
-				cin >> EnteredNumbers[0];
+				cin >> a;
 
 			}
 			minuses(50);
@@ -409,7 +398,7 @@ void deleteanorder()
 
 		cin.ignore(256, '\n');
 
-		cin >> EnteredNumbers[0];
+		cin >> ans;
 
 	}
 	minuses(50);
@@ -508,7 +497,7 @@ int main()
 
 			cin.ignore(256, '\n');
 
-			cin >> EnteredNumbers[0];
+			cin >> ans;
 
 		}
 
