@@ -122,6 +122,17 @@ void checkLicense() // Checks if the person has license.
 		USER you = getUserbyNames(name1, name2, name3);
 		string numb;
 		cout << "Enter USN: "; cin >> numb;
+		while (cin.fail()) {
+
+			cout << "Enter a number, please!" << endl;
+
+			cin.clear();
+
+			cin.ignore(256, '\n');
+
+			cin >> EnteredNumbers[0];
+
+		}
 		system("cls");
 		cout << endl << "License: ";
 		if (check_usn(numb, you) == true) {
@@ -224,6 +235,17 @@ void createOrder()
 		minuses(50);
 		int input;
 		cin >> input;
+		while (cin.fail()) {
+
+			cout << "Enter a number, please!" << endl;
+
+			cin.clear();
+
+			cin.ignore(256, '\n');
+
+			cin >> EnteredNumbers[0];
+
+		}
 		switch (input)
 		{
 		case 1:
@@ -236,6 +258,17 @@ void createOrder()
 			minuses(50);
 			cout << endl;
 			cin >> gun1;
+			while (cin.fail()) {
+
+				cout << "Enter a number, please!" << endl;
+
+				cin.clear();
+
+				cin.ignore(256, '\n');
+
+				cin >> EnteredNumbers[0];
+
+			}
 			if (isNullOrder() == true && amount < 3)
 			{
 				for (int i = 0; i < 10; i++)
@@ -273,6 +306,17 @@ void createOrder()
 			minuses(50);
 			cout << "Please enter a gun's position number." << endl;
 			cin >> gun1;
+			while (cin.fail()) {
+
+				cout << "Enter a number, please!" << endl;
+
+				cin.clear();
+
+				cin.ignore(256, '\n');
+
+				cin >> EnteredNumbers[0];
+
+			}
 			minuses(50);
 
 			if (gun1 > amount) { minuses(50); cout << "Please enter a valid gun slot!"; minuses(50); }
@@ -307,6 +351,17 @@ void createOrder()
 			minuses(50);
 			cout << "1. Yes" << endl << "2. No" << endl;
 			int a; cin >> a;
+			while (cin.fail()) {
+
+				cout << "Enter a number, please!" << endl;
+
+				cin.clear();
+
+				cin.ignore(256, '\n');
+
+				cin >> EnteredNumbers[0];
+
+			}
 			minuses(50);
 			switch (a) {
 			case 1: {
@@ -346,6 +401,17 @@ void deleteanorder()
 
 	minuses(50);
 	int ans; cin >> ans;
+	while (cin.fail()) {
+
+		cout << "Enter a number, please!" << endl;
+
+		cin.clear();
+
+		cin.ignore(256, '\n');
+
+		cin >> EnteredNumbers[0];
+
+	}
 	minuses(50);
 
 	if (orders[ans - 1].isCreated == false) { minuses(50); cout << "The " << ans << numWord(ans) << " order has not been found."; minuses(50); }
@@ -434,6 +500,17 @@ int main()
 		}
 
 		cin >> ans;
+		while (cin.fail()) {
+
+			cout << "Enter a number, please!" << endl;
+
+			cin.clear();
+
+			cin.ignore(256, '\n');
+
+			cin >> EnteredNumbers[0];
+
+		}
 
 		if (IsRegistered != true) {
 			switch (ans)
